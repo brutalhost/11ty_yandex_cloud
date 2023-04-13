@@ -1,0 +1,39 @@
+name: 11ty build and Yandex deploy
+on:
+  push:
+#    paths:
+#      - 'src/**'
+
+jobs:
+  build_11ty:
+    name: Build 11ty site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build 11ty _site folder
+        uses: TartanLlama/actions-eleventy@master
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_dir: _site
+          publish_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+
+#  yandex_deploy:
+#    needs: build_11ty
+#    name:  Deploy to Yandex S3
+#    runs-on: ubuntu-latest
+#    environment: yandex-s3
+#    steps:
+#      - uses: actions/checkout@v3
+#        with:
+#          ref: 'gh-pages'
+#      - name: Deploy
+#        uses: povetek/yandex-object-storage-action@v3
+#        with:
+#          access-key-id: ${{ secrets.ACCESS_KEY_ID }}
+#          secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
+#          bucket: ${{ secrets.BUCKET }}
+#          path: ./public_html
+#          clear: true

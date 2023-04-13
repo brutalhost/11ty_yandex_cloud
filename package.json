@@ -1,0 +1,15 @@
+{
+  "name": "s3_11ty",
+  "version": "1.0.0",
+  "description": "Template 11ty for s3",
+  "scripts": {
+    "build": "npx @11ty/eleventy",
+    "serve": "npx @11ty/eleventy --serve"
+  },
+  "keywords": [],
+  "author": "Andrey Orlov",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}
