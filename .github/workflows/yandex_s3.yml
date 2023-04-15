@@ -1,10 +1,9 @@
 name: Yandex S3 Deploy
 on:
-  push:
-    branches:
-      - gh-pages
-    paths:
-      - public_html/**
+  workflow_run:
+    workflows: 11ty build
+    types:
+      - completed
 
 jobs:
   yandex_deploy:
@@ -30,5 +29,5 @@ jobs:
           access-key-id: ${{ secrets.ACCESS_KEY_ID }}
           secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
           bucket: ${{ secrets.BUCKET }}
-          path: ./public_html
+          path: public_html
           clear: true
