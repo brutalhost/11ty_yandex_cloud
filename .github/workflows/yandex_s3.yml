@@ -4,8 +4,6 @@ on:
     workflows: 11ty build
     types:
       - completed
-  push:
-    branches: gh-pages
 
 jobs:
   yandex_deploy:
