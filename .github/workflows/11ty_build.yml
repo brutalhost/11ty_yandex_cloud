@@ -12,14 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
       - name: Build 11ty folder
         uses: TartanLlama/actions-eleventy@master
         with:
           install_dependencies: true
-#      - name: Deploy to gh-pages
-#        uses: peaceiris/actions-gh-pages@v3
-#        with:
-#          publish_dir: dist
-#          destination_dir: public_html
-#          publish_branch: gh-pages
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Push dist to public branch
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: gh-pages
+          FOLDER: dist
+          TARGET_DIR: public_html
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MESSAGE: "Build: ({sha}) {msg}" # The commit message
