@@ -1,5 +1,6 @@
 name: Yandex S3 Deploy
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: 11ty build
     types:
