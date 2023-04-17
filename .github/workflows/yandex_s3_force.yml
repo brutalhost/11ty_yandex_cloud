@@ -1,9 +1,6 @@
-name: Yandex S3 Deploy
+name: Yandex S3 Deploy (force)
 on:
-  workflow_run:
-    workflows: 11ty build
-    types:
-      - completed
+  workflow_dispatch:
 
 jobs:
   yandex_deploy:
@@ -16,14 +13,7 @@ jobs:
           ref: gh-pages
           fetch-depth: 0
 
-      - name: Get changed files in the public_html folder
-        id: changed-files-specific
-        uses: tj-actions/changed-files@v35
-        with:
-          files: public_html/**
-
       - name: Deploy
-        if: steps.changed-files-specific.outputs.any_changed == 'true'
         uses: povetek/yandex-object-storage-action@v3
         with:
           access-key-id: ${{ secrets.ACCESS_KEY_ID }}
